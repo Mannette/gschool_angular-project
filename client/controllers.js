@@ -42,7 +42,7 @@ myApp.controller('loginController',
       AuthService.register($scope.registerForm.username, $scope.registerForm.password)
         // handle success
         .then(function () {
-          $location.path('/main');
+          $location.path('/');
           $scope.disabled = false;
           $scope.registerForm = {};
           $scope.success = true;
@@ -71,7 +71,7 @@ myApp.controller('logoutController',
       AuthService.logout()
         .then(function () {
           $scope.hasAuthed = false;
-          $location.path('/#/login');
+          $location.path('/');
         });
 
     };
@@ -234,6 +234,7 @@ myApp.controller('githubController',
     };
 
     $scope.getAuthed = function() {
+      console.log($scope.hasAuthed)
       $scope.hasAuthed = true;
     };
 

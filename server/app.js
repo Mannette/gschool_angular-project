@@ -21,8 +21,8 @@ var User = require('./models/user.js');
 var app = express();
 
 // require routes
-var routes = require('./routes/api.js');
-var mainRoutes = require('./routes/index.js');
+var githubAuth = require('./routes/githubAuth.js');
+var localAuth = require('./routes/localAuth.js');
 
 // define middleware
 app.use(logger('dev'));
@@ -39,22 +39,22 @@ app.use(passport.session());
 // app.use(express.static(path.join(__dirname, 'public')));
 
 // configure passport
-passport.use(new localStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// passport.use(new localStrategy(User.authenticate()));
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 
 // routes
-app.use('/user/', routes);
-app.use('/', mainRoutes);
+app.use('/user/', githubAuth);
+app.use('/auth/', localAuth);
 
 app.use(express.static(path.join(__dirname, '../client')));
 
 
 // error hndlers
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
 app.use(function(err, req, res) {

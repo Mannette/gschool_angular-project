@@ -4,19 +4,27 @@
 
   <div class="text-center">
     <span>Enter a Github Username to get started</span>
-    <form ng-submit="getGithub()">
 
-      <input id="githubName" class="form-control" placeholder="ex: mjhea0" ng-model="githubName">
-      <br>
+      <!-- if authenticated through github -->
+      <form ng-show="hasAuthed" ng-submit="getAuthedGithub()">
+        <input id="githubName" class="form-control" placeholder="ex: mjhea0" ng-model="githubName" required>
+        <br>
+        <div class="text-center">
+          <button type="submit" ng-show="hasAuthed" class="btn btn-sm btn-success">Get Stats!</button>
+          <a type="button" class="btn btn-sm btn-success githubButton" href="/user/auth/github" ng-click="getAuthed()"><img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" class="githubLogo"> Auth through Github!</a>
+        </div>
+      </form>
 
-      <div class="text-center">
-
-        <button type="submit" ng-hide="hasAuthed" class="btn btn-sm btn-info">Get Stats!</button>
-        <button type="submit" ng-click="getAuthedGithub()" ng-show="hasAuthed" class="btn btn-sm btn-success">Get Stats!</button>
-        <a type="button" class="btn btn-sm btn-success githubButton" href="/user/auth/github" ng-click="getAuthed()"><img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" class="githubLogo"> Auth through Github!</a>
-      </div>
-
+      <!-- if NOT authenticated through github -->
+      <form ng-show="!hasAuthed" ng-submit="getGithub()">
+        <input id="githubName" class="form-control" placeholder="ex: mjhea0" ng-model="githubName" required>
+        <br>
+        <div class="text-center">
+          <button type="submit" class="btn btn-sm btn-success">Get Stats!</button>
+          <a type="button" class="btn btn-sm btn-success githubButton" href="/user/auth/github" ng-click="getAuthed()"><img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" class="githubLogo"> Auth through Github!</a>
+        </div>
     </form>
+
   </div>
   <br>
   <div ng-controller="logoutController" class="logoutButton">
