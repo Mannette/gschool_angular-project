@@ -1,0 +1,62 @@
+<body class="loginBody">
+
+  <div class="col-md-4-center text-center">
+    <h1><u>Github Statistics Login</u></h2>
+    <div ng-show="loginError" class="alert alert-danger">Invalid username or password!</div>
+    <form class="form" ng-submit="login()">
+      <div class="form-group">
+        <label>Username</label>
+        <input id="loginName" type="text" class="form-control" name="username" ng-model="loginForm.username" placeholder="Enter your username.." required>
+      </div>
+      <div class="form-group passwordText">
+        <label>Password</label>
+          <input type="password" class="form-control" name="password" ng-model="loginForm.password" placeholder="Enter your password" required>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-info" ng-disabled="disabled">Login</button>
+        </div>
+    </form>
+  </div>
+  <div class="signUpText">
+    <span>Don't have a username? </span><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Sign Up!</button>
+  </div>
+
+
+    <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog" action="/register" method="post">
+    <div class="modal-dialog">
+
+      <!-- ** Modal content ** -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Sign up!</h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-lg-12">
+            <h1>Register</h2>
+            <div ng-show="error" class="alert alert-danger">Ohh noess! Something went wrong!</div>
+            <div ng-show="success" class="alert alert-success">Registration successful!</div>
+            <form class="form" ng-submit="register()">
+              <div class="form-group">
+                <label>Username</label>
+                <input type="text" class="form-control" name="username" ng-model="registerForm.username" placeholder="Pick your username.." required>
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                  <input type="password" class="form-control" name="password" ng-model="registerForm.password" placeholder="Password must be more than five characters" required>
+                </div>
+                <div>
+                  <button type="submit" class="btn btn-info" ng-disabled="disabled" ng-show="registerForm.password.length >= 6">Register</button>
+                </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
